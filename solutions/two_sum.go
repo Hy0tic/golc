@@ -1,5 +1,6 @@
 package main
 
+// leetcode #1
 func twoSum(nums []int, target int) []int {
     var prevMap = make(map[int]int) // create dictionary of value and index
 

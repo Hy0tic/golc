@@ -1,5 +1,6 @@
 package main
 
+// leetcode #217
 func containsDuplicate(nums []int) bool {
 	var existMap = map[int]bool{}
 
