@@ -1,7 +1,5 @@
 package main
 
-import()
-
 func longestConsecutive(nums []int) int {
 	var existMap = map[int]bool{}
 	var longest = 0
