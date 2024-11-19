@@ -9,7 +9,7 @@ func characterReplacement(s string, k int) int {
 
     for right := 0; right < len(s); right++ {
         freqMap[s[right]]++
-        maxFreq = max(maxFreq, freqMap[s[right]])
+        maxFreq = Max(maxFreq, freqMap[s[right]])
 
         // Shrink the window if the number of replacements exceeds k
         for right-left+1-maxFreq > k {
@@ -21,11 +21,4 @@ func characterReplacement(s string, k int) int {
     }
 
     return result
-}
-
-func max(a, b int) int {
-    if a > b {
-        return a
-    }
-    return b
 }
