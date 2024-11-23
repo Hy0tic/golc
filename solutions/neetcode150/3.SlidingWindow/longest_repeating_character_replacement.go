@@ -1,6 +1,6 @@
 package main
 
-// leetcode 424
+// leetcode #424
 func characterReplacement(s string, k int) int {
     left := 0
     maxFreq := 0

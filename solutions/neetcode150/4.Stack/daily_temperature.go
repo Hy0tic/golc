@@ -6,7 +6,7 @@ type KeyValuePair struct {
 	Index       int
 }
 
-// Leetcode 739
+// Leetcode #739
 func dailyTemperatures(temperatures []int) []int {
 	stack := []KeyValuePair{} // Stack to hold key-value pairs
 	res := make([]int, len(temperatures))

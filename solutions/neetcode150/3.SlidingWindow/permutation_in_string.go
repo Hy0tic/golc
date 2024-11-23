@@ -1,7 +1,7 @@
 package main
 
 
-// leetcode 567
+// leetcode #567
 func checkInclusion(s1 string, s2 string) bool {
     if len(s2) < len(s1) {
         return false
