@@ -1,42 +1,29 @@
 package main
 
 import (
-	"encoding/json"
-	"log"
+	"sort"
+	"strings"
 )
 
 // leetcode #49
 func groupAnagrams(strs []string) [][]string {
-	result := make(map[string][]string)
+	res := make(map[string][]string)
 
-	for i := 0; i < len(strs); i++ {
-		letterMap := make(map[byte]int)
-		currentStr := strs[i];
+	for _, str := range strs {
+		// Convert string to a slice of runes for sorting
+		charArr := strings.Split(str, "")
+		sort.Strings(charArr)
+		key := strings.Join(charArr, "")
 
-		alphabet := "abcdefghijklmnopqrstuvwxyz"
-		for k := 0; k < len(alphabet); k++ {
-			letterMap[alphabet[k]] = 0
-		}
-
-        for k := 0; k < len(currentStr); k++ {
-			letterMap[currentStr[k]]++;
-		}
-
-		// serialize letter map representing the string
-		jsonString, err := json.Marshal(letterMap)
-		if err != nil {
-			log.Fatalf("Error serializing map: %v", err)
-		}
-
-		result[string(jsonString)] = append(result[string(jsonString)], currentStr)
-    }
-
-
-	var arrayOfArrays [][]string
-	// Iterate over the map and append each slice to the array of arrays
-	for _, values := range result {
-		arrayOfArrays = append(arrayOfArrays, values)
+		// Append the string to the correct group
+		res[key] = append(res[key], str)
 	}
-	
-	return arrayOfArrays
+
+	// Convert map values to a slice of slices
+	result := make([][]string, 0, len(res))
+	for _, group := range res {
+		result = append(result, group)
+	}
+
+	return result
 }

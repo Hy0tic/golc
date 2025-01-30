@@ -1,53 +1,39 @@
 package main
 
 import (
-    "sort"
+	"sort"
 )
 
-type Key struct {
-    A int
-    B int
-    C int
-}
-
 func threeSum(nums []int) [][]int {
-    var hashset = map[Key]bool{}
+	res := [][]int{}
 
-    sort.Ints(nums)
+	sort.Ints(nums)
 
-    for i := 0; i < len(nums); i++ {
-        if i > 0 && nums[i] == nums[i-1] {
-            continue
-        }
+	for i := 0; i < len(nums); i++ {
 
-        l := i + 1
-        r := len(nums) - 1
+		if i > 0 && nums[i-1] == nums[i] {
+			continue
+		}
 
-        for l < r {
-            var threeSum = nums[i] + nums[l] + nums[r]
+		l := i + 1
+		r := len(nums) - 1
 
-            if threeSum > 0 {
-                r--
-            } else if threeSum < 0 {
-                l++
-            } else {
-                hashset[Key { nums[i], nums[l], nums[r] }] = true
-                l++
+		for l < r {
+			sum := nums[i] + nums[l] + nums[r]
+			if sum > 0 {
+				r--
+			} else if sum < 0 {
+				l++
+			} else {
+				res = append(res, []int{nums[i], nums[l], nums[r]})
+				l++
 
-                for nums[l] == nums[l-1] && l < r {
-                    l++
-                }
-            }
-        }
-    }
+				for l < r && nums[l] == nums[l-1] {
+					l++
+				}
+			}
+		}
+	}
 
-    res := [][]int{}
-
-    for key, _ := range hashset {
-        item := []int{ key.A, key.B, key.C }
-
-        res = append(res, item)
-    }
-
-    return res
+	return res
 }
