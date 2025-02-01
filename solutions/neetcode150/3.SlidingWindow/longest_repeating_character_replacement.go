@@ -2,23 +2,24 @@ package main
 
 // leetcode #424
 func characterReplacement(s string, k int) int {
-    left := 0
-    maxFreq := 0
-    result := 0
-    freqMap := make(map[byte]int)
+	l, r, maxf, res := 0, 0, 0, 0
+	seenMap := map[byte]int{}
 
-    for right := 0; right < len(s); right++ {
-        freqMap[s[right]]++
-        maxFreq = Max(maxFreq, freqMap[s[right]])
+	for r < len(s) {
+		// figure out max freq letter
+		seenMap[s[r]]++
+		maxf = Max(maxf, seenMap[s[r]])
 
-        // Shrink the window if the number of replacements exceeds k
-        for right-left+1-maxFreq > k {
-            freqMap[s[left]]--
-            left++
-        }
+		// move L up until subtitution necessary is equal to k
+		for r - l + 1 - maxf > k {
+			seenMap[s[l]]--
+			l++
+		} 
+        
+		// calculate new max window length
+		res = Max(res, r - l + 1)
+		r++
+	}
 
-        result = max(result, right-left+1)
-    }
-
-    return result
+	return res
 }
